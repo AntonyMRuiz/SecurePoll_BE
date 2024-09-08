@@ -11,6 +11,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<User> Users { get; set; } = default!;
     public DbSet<Election> Elections { get; set; } = default!;
     public DbSet<Voter> Voters { get; set; } = default!;
+    public DbSet<Candidate> Candidates { get; set; } = default!;
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
