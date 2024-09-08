@@ -9,6 +9,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<DocumentType> DocumentType { get; set; } = default!;
     public DbSet<Rol> Roles { get; set; } = default!;
     public DbSet<User> Users { get; set; } = default!;
+    public DbSet<Election> Elections { get; set; } = default!;
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
