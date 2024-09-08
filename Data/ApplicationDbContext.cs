@@ -17,6 +17,7 @@ public class ApplicationDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         DocumentTypeSeeder.Seed(modelBuilder);
         RolSeeder.Seed(modelBuilder);
+        UserSeeder.Seed(modelBuilder, 100);
     }
 
 }
