@@ -39,7 +39,7 @@ namespace SecurePoll_BE.Controllers.V1
         public async Task<ActionResult<Candidate>> GetCandidate(int id)
         {
             var candidate = await _context.Candidates
-             .Include(p => p.User)
+                .Include(p => p.User)
                 .ThenInclude(p => p.DocumentType)
                 .Include(p => p.User)
                 .ThenInclude(p => p.Role)
