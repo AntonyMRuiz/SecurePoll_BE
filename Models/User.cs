@@ -21,6 +21,9 @@ public class User
     [Column("identification_number")]
     public required string IdentificationNumber { get; set; }
 
+    [Column("public_key")]
+    public required string PublicKey { get; set; }
+
     [Column("role_id")]
     public int RoleId { get; set; }
 
