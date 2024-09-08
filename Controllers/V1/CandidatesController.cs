@@ -20,14 +20,36 @@ namespace SecurePoll_BE.Controllers.V1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Candidate>>> GetCandidates()
         {
-            return await _context.Candidates.ToListAsync();
+            return await _context.Candidates
+                .Include(p => p.User)
+                .ThenInclude(p => p.DocumentType)
+                .Include(p => p.User)
+                .ThenInclude(p => p.Role)
+                .Include(p => p.Election)
+                    .ThenInclude(e => e.Owner)
+                        .ThenInclude(o => o.DocumentType)  // Incluye DocumentType del Owner
+                .Include(p => p.Election)
+                    .ThenInclude(e => e.Owner)
+                        .ThenInclude(o => o.Role)
+                .ToListAsync();
         }
 
         // GET: api/Candidates/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Candidate>> GetCandidate(int id)
         {
-            var candidate = await _context.Candidates.FindAsync(id);
+            var candidate = await _context.Candidates
+             .Include(p => p.User)
+                .ThenInclude(p => p.DocumentType)
+                .Include(p => p.User)
+                .ThenInclude(p => p.Role)
+                .Include(p => p.Election)
+                    .ThenInclude(e => e.Owner)
+                        .ThenInclude(o => o.DocumentType)  // Incluye DocumentType del Owner
+                .Include(p => p.Election)
+                    .ThenInclude(e => e.Owner)
+                        .ThenInclude(o => o.Role)
+                .FirstOrDefaultAsync(e => e.Id == id);
 
             if (candidate == null)
             {
