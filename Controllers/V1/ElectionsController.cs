@@ -25,14 +25,23 @@ namespace SecurePoll_BE.Controllers.V1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Election>>> GetElections()
         {
-            return await _context.Elections.ToListAsync();
+            return await _context.Elections.Include(p => p.Owner)
+                .ThenInclude(o => o.DocumentType)  
+                .Include(p => p.Owner)
+                .ThenInclude(o => o.Role)
+                .ToListAsync();
         }
 
         // GET: api/Elections/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Election>> GetElection(int id)
         {
-            var election = await _context.Elections.FindAsync(id);
+            var election = await _context.Elections
+                .Include(p => p.Owner)
+                .ThenInclude(o => o.DocumentType)  
+                .Include(p => p.Owner)
+                .ThenInclude(o => o.Role)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             if (election == null)
             {
