@@ -10,7 +10,7 @@ using SecurePoll_BE.Models;
 
 namespace SecurePoll_BE.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class RolesController : ControllerBase
     {
