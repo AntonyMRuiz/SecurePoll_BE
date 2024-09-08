@@ -22,7 +22,7 @@ public class User
     public required string IdentificationNumber { get; set; }
 
     [Column("public_key")]
-    public required string PublicKey { get; set; }
+    public string? PublicKey { get; set; }
 
     [Column("role_id")]
     public int RoleId { get; set; }
@@ -35,7 +35,6 @@ public class User
 
     [Column("oauth_google")]
     public string? OauthGoogle { get; set; }
-
 
     [ForeignKey("DocumentTypeId")]
     public virtual DocumentType? DocumentType { get; set; }
