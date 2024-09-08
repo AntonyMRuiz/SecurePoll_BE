@@ -1,53 +1,58 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecurePoll_BE.Data;
 using SecurePoll_BE.Models;
 
-namespace SecurePoll_BE.Controllers
+namespace SecurePoll_BE.Controllers.V1
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class RolesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public UsersController(ApplicationDbContext context)
+        public RolesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Roles
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<Rol>>> GetRoles()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Roles.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Roles/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<Rol>> GetRol(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var rol = await _context.Roles.FindAsync(id);
 
-            if (user == null)
+            if (rol == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return rol;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Roles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutRol(int id, Rol rol)
         {
-            if (id != user.Id)
+            if (id != rol.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(rol).State = EntityState.Modified;
 
             try
             {
@@ -55,7 +60,7 @@ namespace SecurePoll_BE.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!RolExists(id))
                 {
                     return NotFound();
                 }
@@ -68,36 +73,36 @@ namespace SecurePoll_BE.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Roles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Rol>> PostRol(Rol rol)
         {
-            _context.Users.Add(user);
+            _context.Roles.Add(rol);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction("GetRol", new { id = rol.Id }, rol);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Roles/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteRol(int id)
         {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var rol = await _context.Roles.FindAsync(id);
+            if (rol == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(user);
+            _context.Roles.Remove(rol);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserExists(int id)
+        private bool RolExists(int id)
         {
-            return _context.Users.Any(e => e.Id == id);
+            return _context.Roles.Any(e => e.Id == id);
         }
     }
 }

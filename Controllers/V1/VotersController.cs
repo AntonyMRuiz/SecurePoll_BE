@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SecurePoll_BE.Data;
 using SecurePoll_BE.Models;
 
-namespace SecurePoll_BE.Controllers
+namespace SecurePoll_BE.Controllers.V1
 {
     [Route("api/[controller]")]
     [ApiController]
