@@ -14,8 +14,8 @@ public class Voter
     [Column("election_id")]
     public int ElectionId { get; set; }
 
-    [Column("hash")]
-    public int Hash { get; set; }
+    [Column("hash_vote")]
+    public int HashVote { get; set; }
 
     [ForeignKey("UserId")]
     public User? User { get; set; }
