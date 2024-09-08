@@ -15,11 +15,11 @@ var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
 var conectionDB = $"server={dbHost};port={dbPort};database={dbDatabaseName};uid={dbUser};password={dbPassword}";
 
-// Development
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("MySqlConnection"),
-                    ServerVersion.Parse("8.0.20-mysql")));
 // Production
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//     options.UseMySql(builder.Configuration.GetConnectionString("MySqlConnection"),
+//                     ServerVersion.Parse("8.0.20-mysql")));
+// Development
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(conectionDB, ServerVersion.Parse("8.0.20-mysql")));
 
